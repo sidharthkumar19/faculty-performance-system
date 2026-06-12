@@ -1,0 +1,153 @@
+<style>
+/* ═══════════════════════════════════════════════════════════════════════
+   MERIDIAN POLISH LAYER · PHASE 5 — LOGIN MOMENTS, COMPARISON & CONTRAST
+   Append-only. Sits after Phase 4 at the end of IndexStyles.html.
+   Delete this block to fully revert Phase 5.
+
+   Built per the step-by-step implementation plan (§6 of the UI/UX
+   Redesign Strategy):
+     §1  Login — self-drawing gold meridian + background grid drift
+         (Step 3)
+     §2  Login — security posture line under the sign-in button
+         (Step 4)
+     §3  Report Comparison — sticky identity column, frozen header,
+         alternating column washes, scope breadcrumb (Step 5)
+     §4  Contrast corrections — WCAG AA pass on topbar labels,
+         gold-on-white links, failing pill tints (Step 6)
+
+   All motion in this layer inherits the prefers-reduced-motion kill
+   switch from Polish Layer v1 §8. Nothing here touches markup or
+   scripts; the activation-email recolor (Step 7) lives separately in
+   Activation.gs.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─────────────────────────────────────────────────────────────
+   §1 · LOGIN — SELF-DRAWING MERIDIAN + GRID DRIFT   (Step 3)
+   Targets: .nl-brand::after (the vertical gold line) and
+   .nl-brand::before (the 48px ruled grid). transform/background-
+   position only — no layout work, GPU-cheap, one-shot + slow loop.
+   Honors prefers-reduced-motion via v1 §8.
+   ───────────────────────────────────────────────────────────── */
+@keyframes mplMeridianDraw{
+  from{transform:scaleY(0);opacity:0;}
+  to{transform:scaleY(1);opacity:.45;} /* hands off to nl-meridian's 0% frame */
+}
+@keyframes mplGridDrift{
+  from{background-position:0 0;}
+  to{background-position:48px 48px;}
+}
+/* Chain: draw once (.9s), then the pre-existing nl-meridian breathing
+   pulse takes over opacity/glow from 1.05s — redeclaring it here is
+   required because this animation list replaces the one at the
+   original rule. Reduced-motion: the existing media kill switch
+   (animation:none !important on this pseudo) still wins. */
+#loginPage.nl-v2 .nl-brand::after{
+  transform-origin:top center;
+  animation:
+    mplMeridianDraw .9s cubic-bezier(.22,1,.36,1) .15s both,
+    nl-meridian 5s ease-in-out 1.05s infinite alternate;
+}
+#loginPage.nl-v2 .nl-brand::before{
+  animation:mplGridDrift 96s linear infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §2 · LOGIN — SECURITY POSTURE LINE                (Step 4)
+   Injected entirely via CSS ::after on the credentials card —
+   no markup change. The lock is an inline SVG in the content
+   list, drawn in the same 2px-stroke style as the brand pane's
+   feature icons.
+   ───────────────────────────────────────────────────────────── */
+#loginPage.nl-v2 .nl-creds-card::after{
+  content:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%234A6280' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><rect x='5' y='11' width='14' height='10' rx='2'/><path d='M8 11V7a4 4 0 0 1 8 0v4'/></svg>") "  Secured institutional access";
+  display:block;
+  text-align:center;
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid var(--nl-line);
+  font-family:var(--m-font-body);
+  font-size:11.5px;
+  font-weight:500;
+  letter-spacing:.04em;
+  color:var(--slate-2);
+  line-height:1;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §3 · REPORT COMPARISON — READING SURFACE          (Step 5)
+   Audit finding: the side-by-side view (#rc-grid) is a horizontal
+   grid of cards whose roots carry inline overflow:hidden, and the
+   grid itself is overflow-x:auto — both legally break position:
+   sticky for per-column headers. True frozen column headers are
+   therefore a STRUCTURAL BACKLOG item, not faked here.
+   What CSS does deliver:
+     a) the mode/actions strip pins to the top while scrolling
+        long columns (the ancestor chain above #rc-body is clean,
+        .main is the vertical scroller)
+     b) alternating column washes for cross-column tracking
+     c) scroll-snap + a visible horizontal scrollbar on the grid
+     d) hover lift on the metric view's picker cards
+   ───────────────────────────────────────────────────────────── */
+/* a) Sticky context strip: chip + sub-line + Export / Change buttons */
+#rc-body > div:first-child{
+  position:sticky;
+  top:0;
+  padding:10px 0 10px;
+  margin-top:-10px;
+  background:var(--ivory);
+  box-shadow:0 6px 12px -8px rgba(7,15,28,.12);
+  z-index:5;
+}
+/* b) Alternating column wash — overrides the inline #fff card bg */
+#rc-grid > div:nth-child(even){
+  background:#FAFBFE !important;
+}
+/* c) Horizontal navigation: snap columns + visible scrollbar */
+#rc-grid{
+  scroll-snap-type:x proximity;
+  scroll-padding-left:4px;
+}
+#rc-grid > div{
+  scroll-snap-align:start;
+}
+#rc-grid::-webkit-scrollbar{height:8px;}
+#rc-grid::-webkit-scrollbar-thumb{
+  background:var(--ivory-3);
+  border-radius:100px;
+}
+#rc-grid::-webkit-scrollbar-thumb:hover{background:var(--gold);}
+/* d) Metric view: picker cards acknowledge the pointer */
+.cmp-picker-card{
+  transition:border .15s, background .15s,
+             transform .16s ease, box-shadow .16s ease !important;
+}
+.cmp-picker-card:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 14px rgba(12,30,60,.10);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   §4 · CONTRAST CORRECTIONS — WCAG AA PASS          (Step 6)
+   Every pair flagged in the strategy doc was COMPUTED against its
+   real (alpha-blended) background rather than fixed on suspicion.
+   Results — PASSES, deliberately left untouched:
+     · topbar secondary labels  white@.58 on navy   6.31:1
+     · breadcrumb               white@.72 on navy   9.07:1
+     · role pills (all four)    6.21–8.13:1
+     · slate-2 / slate-lt on white        6.27 / 5.02:1
+     · gold-dk #7A5C0D on white/ivory     6.24 / 5.82:1
+     · calendar active weekday  gold on navy header 6.32:1
+   The one genuine FAILURE:
+     · .nb-mark-all:hover  raw gold #C49A2A on white  2.62:1
+   Fixed below by moving the hover to gold-dk (6.24:1), keeping
+   the gold semantic. The rest state of that link was already
+   gold-dk, so only the hover changes.
+   ───────────────────────────────────────────────────────────── */
+.nb-mark-all:hover,
+.topbar .nb-panel .nb-mark-all:hover{
+  color:var(--gold-dk) !important;
+  text-decoration:underline;
+}
+
+/* ═══ END MERIDIAN POLISH LAYER · PHASE 5 ═══ */
+</style>

@@ -1,0 +1,1696 @@
+<!--
+  IPM Styles — every selector scoped under #ipm-root so the Institutional
+  Performance Monitoring portal's CSS cannot leak into the main VMRF app.
+  Originally: Styles__8_.html from the standalone IPM web app.
+-->
+<style>
+/* ═══════════════════════════════════════════════════
+   VMRF IMS — Premium Design System
+   ═══════════════════════════════════════════════════ */
+#ipm-root{
+  /* Core surfaces */
+  --bg:#eef1fb;
+  --bg-2:#f4f6fd;
+  --surface:#ffffff;
+  --surface-2:#f4f6fd;
+  --surface-soft:#eef1fb;
+
+  /* Ink */
+  --ink:#0c1232;
+  --ink-2:#3d4e72;
+  --ink-3:#445080;
+  --muted:#5a6a96;
+
+  /* Lines */
+  --line:#dde2f0;
+  --line-2:#e8ecf7;
+
+  /* Brand — VMRF Navy & Gold */
+  --navy:#0e2a5c;
+  --navy-2:#1a3d7a;
+  --navy-ink:#091e42;
+  --brand:#b8924a;
+  --brand-2:#d4b06b;
+  --brand-soft:#fdf6e8;
+
+  /* Extended accent palette */
+  --indigo:#4f46e5;
+  --indigo-2:#6366f1;
+  --indigo-soft:#eef2ff;
+  --purple:#7c3aed;
+  --purple-2:#9333ea;
+  --purple-soft:#f5f3ff;
+  --cyan:#0891b2;
+  --cyan-2:#06b6d4;
+  --cyan-soft:#ecfeff;
+  --emerald:#059669;
+  --emerald-2:#10b981;
+  --emerald-soft:#ecfdf5;
+  --rose:#e11d48;
+  --rose-2:#fb7185;
+  --rose-soft:#fff1f2;
+  --amber:#d97706;
+  --amber-soft:#fffbeb;
+
+  /* Semantic */
+  --ok:#059669; --ok-soft:#ecfdf5;
+  --warn:#d97706; --warn-soft:#fffbeb;
+  --err:#e11d48; --err-soft:#fff1f2;
+  --info:#4f46e5; --info-soft:#eef2ff;
+
+  /* Radii */
+  --radius:14px; --radius-lg:20px; --radius-sm:10px;
+
+  /* Shadows */
+  --shadow-xs:0 1px 3px rgba(14,42,92,.05);
+  --shadow-sm:0 2px 6px rgba(14,42,92,.07),0 1px 2px rgba(14,42,92,.04);
+  --shadow:0 4px 20px rgba(14,42,92,.09),0 1px 4px rgba(14,42,92,.05);
+  --shadow-lg:0 16px 48px rgba(14,42,92,.13),0 4px 12px rgba(14,42,92,.07);
+  --shadow-xl:0 32px 80px rgba(14,42,92,.17),0 8px 24px rgba(14,42,92,.08);
+  --glow-indigo:0 0 32px rgba(79,70,229,.25);
+  --glow-brand:0 0 32px rgba(184,146,74,.25);
+}
+
+#ipm-root *{box-sizing:border-box}
+#ipm-root, #ipm-root{
+  margin:0;padding:0;
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+
+/* Rich gradient background */
+#ipm-root::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 900px 600px at -10% 20%, rgba(79,70,229,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 500px at 110% 80%, rgba(124,58,237,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 600px 400px at 50% -20%, rgba(8,145,178,.05) 0%, transparent 55%),
+    linear-gradient(160deg, #eef1fb 0%, #f2f5ff 40%, #f0f8ff 70%, #f2fdf7 100%);
+}
+
+#ipm-root button{font-family:inherit;cursor:pointer;border:0;background:none}
+#ipm-root input, #ipm-root select, #ipm-root textarea{
+  font-family:inherit;font-size:14px;width:100%;
+  padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--radius-sm);
+  background:#fff;color:var(--ink);transition:.18s ease;outline:none;
+}
+#ipm-root input::placeholder, #ipm-root textarea::placeholder{color:var(--muted)}
+#ipm-root input:hover, #ipm-root select:hover, #ipm-root textarea:hover{border-color:#bac3e0}
+#ipm-root input:focus, #ipm-root select:focus, #ipm-root textarea:focus{
+  border-color:var(--indigo);
+  box-shadow:0 0 0 4px rgba(79,70,229,.12);
+}
+#ipm-root label{
+  display:block;font-size:11px;font-weight:700;color:var(--ink-3);
+  margin:14px 0 7px;letter-spacing:.07em;text-transform:uppercase;
+}
+#ipm-root .view{display:none;min-height:100vh}
+#ipm-root .view.active{display:block}
+
+/* ══════════════════════════════════════════════
+   LOGIN — premium dark-brand / light-form split
+   ══════════════════════════════════════════════ */
+#ipm-root #view-login{
+  display:none;min-height:100vh;
+  background:
+    radial-gradient(ellipse 1100px 700px at -8% 40%, rgba(14,42,92,.15) 0%,transparent 62%),
+    radial-gradient(ellipse 900px 600px at 108% 65%, rgba(79,70,229,.13) 0%,transparent 62%),
+    radial-gradient(ellipse 600px 400px at 50% 110%, rgba(184,146,74,.09) 0%,transparent 60%),
+    radial-gradient(ellipse 500px 350px at 85% 10%, rgba(8,145,178,.07) 0%,transparent 60%),
+    linear-gradient(155deg,#e8ecf8 0%,#f1f4ff 35%,#f4f6ff 60%,#eef0fd 100%);
+  position:relative;
+}
+/* Subtle dot grid pattern across full login background */
+#ipm-root #view-login::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image:radial-gradient(circle, rgba(14,42,92,.05) 1px, transparent 1px);
+  background-size:38px 38px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 80% at 50% 50%, black 25%, transparent 80%);
+  mask-image:radial-gradient(ellipse 90% 80% at 50% 50%, black 25%, transparent 80%);
+}
+#ipm-root #view-login.active{display:flex;align-items:center;justify-content:center;padding:32px;position:relative}
+#ipm-root .login-wrap{
+  display:grid;grid-template-columns:1.2fr 1fr;gap:0;
+  max-width:1140px;width:100%;
+  border-radius:30px;overflow:hidden;
+  position:relative;z-index:1;
+  box-shadow:
+    0 50px 120px -20px rgba(14,42,92,.28),
+    0 30px 60px -15px rgba(14,42,92,.18),
+    0 12px 30px rgba(14,42,92,.1),
+    0 0 0 1px rgba(255,255,255,.6),
+    inset 0 1px 0 rgba(255,255,255,.9);
+  border:1px solid rgba(255,255,255,.7);
+}
+/* Hairline gold accent on the very top of the login panel */
+#ipm-root .login-wrap::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;z-index:5;pointer-events:none;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(184,146,74,.4) 25%,
+    rgba(212,176,107,.7) 50%,
+    rgba(184,146,74,.4) 75%,
+    transparent 100%);
+}
+#ipm-root .login-brand{
+  padding:64px 58px;
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(184,146,74,.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, rgba(79,70,229,.18) 0%, transparent 55%),
+    linear-gradient(145deg,#08163a 0%,#0e2454 30%,#143372 55%,#0e2856 80%,#091833 100%);
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+/* decorative glowing orbs on brand panel */
+#ipm-root .login-brand::before{
+  content:'';position:absolute;top:-130px;right:-90px;
+  width:440px;height:440px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(184,146,74,.22) 0%,transparent 65%);
+}
+#ipm-root .login-brand::after{
+  content:'';position:absolute;bottom:-110px;left:-70px;
+  width:360px;height:360px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(79,70,229,.18) 0%,transparent 65%);
+}
+#ipm-root .login-brand img{max-width:100%;width:380px;height:auto;margin-bottom:32px;position:relative;z-index:1;filter:brightness(1.1)}
+#ipm-root .logo-badge{display:none}
+#ipm-root .login-brand h1{
+  font-size:20px;line-height:1.25;font-weight:800;margin:0 0 12px;
+  color:#fff;letter-spacing:-.02em;position:relative;z-index:1;
+}
+#ipm-root .tagline{color:rgba(255,255,255,.7);margin:0 0 36px;font-size:14px;font-weight:400;position:relative;z-index:1}
+#ipm-root .brand-points{list-style:none;padding:0;margin:0;position:relative;z-index:1}
+#ipm-root .brand-points li{
+  display:flex;align-items:center;gap:14px;padding:13px 0;
+  color:rgba(255,255,255,.94);font-size:14px;font-weight:500;
+  border-bottom:1px solid rgba(255,255,255,.09);
+  transition:.25s ease;
+}
+#ipm-root .brand-points li:last-child{border-bottom:0}
+#ipm-root .brand-points li:hover{
+  color:#fff;
+  padding-left:6px;
+}
+#ipm-root .dot{
+  width:9px;height:9px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--brand) 0%,var(--brand-2) 100%);
+  box-shadow:
+    0 0 0 4px rgba(184,146,74,.18),
+    0 0 14px rgba(212,176,107,.5),
+    inset 0 1px 0 rgba(255,255,255,.3);
+}
+
+#ipm-root .login-card{background:#fff;padding:64px 56px;display:flex;flex-direction:column;justify-content:center}
+#ipm-root .login-card h2{margin:0 0 6px;font-size:26px;font-weight:800;color:var(--navy-ink);letter-spacing:-.02em}
+#ipm-root .login-card .sub{margin:0 0 28px;color:var(--ink-3);font-size:14px;line-height:1.55}
+#ipm-root .btn-primary{
+  width:100%;padding:14px;
+  background:linear-gradient(135deg,#0b2356 0%,#143372 35%,#1e4595 65%,#2a5298 100%);
+  color:#fff;border-radius:var(--radius-sm);font-weight:700;font-size:14px;
+  margin-top:22px;letter-spacing:.02em;transition:.25s cubic-bezier(.16,1,.3,1);
+  box-shadow:
+    0 6px 20px rgba(14,42,92,.32),
+    0 2px 4px rgba(14,42,92,.18),
+    inset 0 1px 0 rgba(255,255,255,.18),
+    inset 0 -1px 0 rgba(0,0,0,.15);
+  position:relative;overflow:hidden;
+}
+#ipm-root .btn-primary::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 60%);
+  pointer-events:none;
+}
+#ipm-root .btn-primary:hover{
+  background:linear-gradient(135deg,#143372 0%,#1c4490 35%,#2353a4 65%,#3066b8 100%);
+  transform:translateY(-2px);
+  box-shadow:
+    0 12px 32px rgba(14,42,92,.42),
+    0 4px 10px rgba(14,42,92,.18),
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -1px 0 rgba(0,0,0,.15);
+}
+#ipm-root .btn-primary:active{transform:translateY(0)}
+#ipm-root .err{color:var(--err);font-size:13px;margin-top:12px;min-height:18px;font-weight:600}
+
+#ipm-root .seg{display:flex;gap:4px;background:var(--surface-soft);padding:4px;border-radius:var(--radius-sm);border:1.5px solid var(--line)}
+#ipm-root .seg-btn{
+  flex:1;padding:10px 14px;border-radius:8px;font-size:13px;font-weight:600;
+  color:var(--ink-3);transition:.18s ease;cursor:pointer;user-select:none;
+}
+#ipm-root .seg-btn:hover{color:var(--navy)}
+#ipm-root .seg-btn.active{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 100%);
+  color:#fff;
+  box-shadow:0 2px 8px rgba(14,42,92,.25),0 0 0 1px rgba(14,42,92,.1);
+}
+#ipm-root #roleSeg{padding:5px}
+#ipm-root #roleSeg .seg-btn{padding:13px 18px;font-size:14px;letter-spacing:.03em}
+
+/* ══════════════════════════════════════════════
+   TOPBAR — deep dark gradient
+   ══════════════════════════════════════════════ */
+#ipm-root .topbar{
+  display:flex;align-items:center;gap:20px;padding:0 32px;height:64px;
+  background:
+    radial-gradient(ellipse 600px 200px at 0% 0%, rgba(184,146,74,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 500px 200px at 100% 100%, rgba(79,70,229,.1) 0%, transparent 60%),
+    linear-gradient(135deg,#08163a 0%,#0c2150 35%,#0e2856 70%,#091833 100%);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  position:sticky;top:0;z-index:10;
+  box-shadow:
+    0 4px 24px rgba(9,24,51,.35),
+    0 1px 0 rgba(212,176,107,.08) inset;
+}
+/* Hairline gold accent at the bottom of the topbar */
+#ipm-root .topbar::after{
+  content:'';position:absolute;left:0;right:0;bottom:-1px;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(184,146,74,.25) 30%,
+    rgba(212,176,107,.4) 50%,
+    rgba(184,146,74,.25) 70%,
+    transparent 100%);
+}
+#ipm-root .brand-sm{
+  font-weight:800;color:#fff;font-size:16px;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:8px;
+}
+#ipm-root .brand-sm span{
+  color:var(--brand-2);font-weight:700;font-size:9px;
+  text-transform:uppercase;letter-spacing:.16em;
+  background:rgba(212,176,107,.12);
+  border:1px solid rgba(212,176,107,.25);
+  padding:3px 9px;border-radius:6px;
+  white-space:nowrap;
+}
+#ipm-root .topbar-vmrf-logo{height:54px;width:auto;object-fit:contain;vertical-align:middle;margin-right:2px;filter:brightness(1.1)}
+#ipm-root .tabs{display:flex;gap:3px;margin-left:24px}
+#ipm-root .tab{
+  padding:9px 18px;border-radius:9px;font-size:13px;font-weight:600;
+  color:rgba(255,255,255,.78);transition:.2s ease;
+  position:relative;
+}
+#ipm-root .tab:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.95)}
+#ipm-root .tab.active{
+  background:linear-gradient(135deg,var(--indigo) 0%,var(--purple) 100%);
+  color:#fff;
+  box-shadow:
+    0 4px 14px rgba(99,102,241,.5),
+    0 0 0 1px rgba(99,102,241,.3),
+    inset 0 1px 0 rgba(255,255,255,.18);
+}
+#ipm-root .user-box{margin-left:auto;display:flex;align-items:center;gap:12px}
+#ipm-root .avatar{
+  width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(135deg,var(--brand) 0%,var(--brand-2) 100%);
+  color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px;
+  box-shadow:
+    0 4px 12px rgba(184,146,74,.45),
+    0 0 0 1px rgba(212,176,107,.3),
+    inset 0 1px 0 rgba(255,255,255,.25);
+  flex-shrink:0;
+  font-family:'Outfit','Inter',sans-serif;
+}
+#ipm-root .uname{font-weight:700;font-size:13px;color:#fff}
+#ipm-root .urole{font-size:11px;color:rgba(255,255,255,.72);margin-top:1px}
+#ipm-root .btn-ghost{
+  padding:8px 14px;border-radius:9px;font-size:12px;font-weight:600;
+  color:rgba(255,255,255,.82);transition:.18s ease;
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+}
+#ipm-root .btn-ghost:hover{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.28)}
+#ipm-root .btn-danger{
+  padding:8px 14px;border-radius:9px;font-size:12px;font-weight:700;
+  color:#fff;background:linear-gradient(135deg,#be123c,#e11d48);
+  border:1px solid rgba(255,255,255,.1);transition:.18s;
+  box-shadow:0 2px 8px rgba(225,29,72,.3);
+}
+#ipm-root .btn-danger:hover{
+  background:linear-gradient(135deg,#9f1239,#be123c);
+  transform:translateY(-1px);box-shadow:0 6px 16px rgba(225,29,72,.4);
+}
+
+#ipm-root .btn-secondary{
+  padding:9px 14px;border-radius:9px;font-size:13px;font-weight:600;
+  color:var(--navy);background:#fff;border:1.5px solid var(--line);transition:.18s;
+  display:inline-flex;align-items:center;gap:6px;
+  box-shadow:var(--shadow-xs);
+}
+#ipm-root .btn-secondary:hover:not(:disabled){border-color:var(--indigo);color:var(--indigo);background:var(--indigo-soft)}
+#ipm-root .btn-secondary:disabled{opacity:.4;cursor:not-allowed}
+
+#ipm-root .toolbar{display:flex;align-items:center;gap:12px;padding:14px 0 18px;flex-wrap:wrap}
+#ipm-root .search-input{
+  flex:1;min-width:220px;max-width:400px;
+  padding:10px 14px 10px 40px;border:1.5px solid var(--line);border-radius:10px;
+  font-size:13px;background:#fff url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238e9cc4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>") 14px center no-repeat;
+}
+#ipm-root .search-input:focus{border-color:var(--indigo);box-shadow:0 0 0 4px rgba(79,70,229,.1);outline:none}
+#ipm-root .muted-sm{font-size:12px;color:var(--muted);margin-left:auto}
+
+/* Chips */
+#ipm-root .chip{display:inline-block;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.02em}
+#ipm-root .chip.ok{background:linear-gradient(135deg,#d1fae5,#a7f3d0);color:#065f46;border:1px solid rgba(5,150,105,.2)}
+#ipm-root .chip.warn{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;border:1px solid rgba(217,119,6,.2)}
+#ipm-root .chip.muted-chip{background:var(--surface-soft);color:var(--muted)}
+#ipm-root .chip.reviewed{background:linear-gradient(135deg,#e0e7ff,#c7d2fe);color:#3730a3;border:1px solid rgba(99,102,241,.2)}
+#ipm-root .chip-warn{background:linear-gradient(135deg,#fef9c3,#fde047);color:#713f12;border:1px solid rgba(234,179,8,.3)}
+
+#ipm-root .btn-mark{background:var(--emerald-soft);color:#065f46;margin-left:6px;padding:5px 11px;border-radius:7px;font-size:11px;font-weight:700;border:1px solid rgba(5,150,105,.15)}
+#ipm-root .btn-mark:hover{background:#d1fae5}
+#ipm-root .btn-undo{background:var(--amber-soft);color:#92400e;margin-left:6px;padding:5px 11px;border-radius:7px;font-size:11px;font-weight:700;border:1px solid rgba(217,119,6,.15)}
+#ipm-root .btn-undo:hover{background:#fef3c7}
+
+#ipm-root .pw-warn-banner{
+  background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1px solid #fcd34d;color:#92400e;
+  padding:13px 16px;border-radius:10px;font-size:13px;margin-bottom:16px;line-height:1.5;
+}
+#ipm-root .pw-wrap{position:relative}
+#ipm-root .pw-wrap input{padding-right:44px}
+#ipm-root .pw-eye{
+  position:absolute;top:50%;right:8px;transform:translateY(-50%);
+  width:32px;height:32px;display:grid;place-items:center;
+  color:var(--muted);border-radius:7px;transition:.15s;
+}
+#ipm-root .pw-eye:hover{color:var(--navy);background:var(--surface-soft)}
+#ipm-root .pw-eye.on{color:var(--brand)}
+
+/* Confirm / modal dialogs */
+#ipm-root .confirm{text-align:center;padding:8px 4px}
+#ipm-root .confirm h2{margin:16px 0 8px;font-size:20px;font-weight:800;color:var(--navy-ink)}
+#ipm-root .confirm p{margin:0 0 22px;color:var(--ink-2);font-size:14px;line-height:1.6}
+#ipm-root .confirm-icon{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;margin:0 auto}
+#ipm-root .confirm-icon.danger{background:var(--err-soft);color:var(--err)}
+#ipm-root .confirm-icon.info{background:var(--info-soft);color:var(--info)}
+#ipm-root .confirm-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+#ipm-root .confirm-actions button{min-width:140px;padding:12px 20px;border-radius:10px;font-size:14px}
+
+#ipm-root .breadcrumbs{display:flex;align-items:center;gap:2px;font-size:13px;color:rgba(255,255,255,.78);margin-left:10px;flex-wrap:wrap}
+#ipm-root .breadcrumbs .crumb{cursor:pointer;padding:6px 12px;border-radius:8px;font-weight:500;transition:.18s;color:rgba(255,255,255,.78)}
+#ipm-root .breadcrumbs .crumb:hover{background:rgba(255,255,255,.1);color:#fff}
+#ipm-root .breadcrumbs .crumb.active-crumb{color:rgba(255,255,255,.9);font-weight:700;cursor:default}
+#ipm-root .breadcrumbs .crumb.active-crumb:hover{background:transparent}
+#ipm-root .breadcrumbs .sep{color:rgba(255,255,255,.2);font-size:18px;line-height:1;user-select:none}
+
+/* ══════════════════════════════════════════════
+   CONTENT / LAYOUT
+   ══════════════════════════════════════════════ */
+#ipm-root .content{max-width:1320px;margin:0 auto;padding:34px 32px}
+#ipm-root .page-title{
+  font-size:28px;font-weight:800;margin:0 0 24px;letter-spacing:-.035em;
+  font-family:'Outfit','Inter',sans-serif;
+  background:linear-gradient(135deg,var(--navy-ink) 0%,var(--indigo) 60%,var(--purple) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+#ipm-root .tab-pane{display:none}
+#ipm-root .tab-pane.active{display:block;animation:fadeIn .28s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ══════════════════════════════════════════════
+   KPI TILES — each uniquely colored
+   ══════════════════════════════════════════════ */
+#ipm-root .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:24px}
+#ipm-root .kpi{
+  background:#fff;border:1.5px solid var(--line);border-radius:16px;
+  padding:24px 26px;position:relative;overflow:hidden;
+  box-shadow:0 1px 3px rgba(14,42,92,.04), 0 4px 12px rgba(14,42,92,.04);
+  transition:.3s cubic-bezier(.16,1,.3,1);
+}
+#ipm-root .kpi:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+
+/* Colored left accent bars per nth-child */
+#ipm-root .kpi:before{
+  content:'';position:absolute;left:0;top:0;width:4px;height:100%;border-radius:0;
+}
+#ipm-root .kpi:nth-child(1):before{background:linear-gradient(180deg,var(--indigo),var(--purple))}
+#ipm-root .kpi:nth-child(2):before{background:linear-gradient(180deg,var(--cyan),var(--cyan-2))}
+#ipm-root .kpi:nth-child(3):before{background:linear-gradient(180deg,var(--emerald),var(--emerald-2))}
+#ipm-root .kpi:nth-child(4):before{background:linear-gradient(180deg,var(--brand),var(--brand-2))}
+#ipm-root .kpi:nth-child(5):before{background:linear-gradient(180deg,var(--rose),var(--rose-2))}
+
+/* Subtle decorative glow on each KPI */
+#ipm-root .kpi::after{
+  content:'';position:absolute;top:-40px;right:-40px;
+  width:140px;height:140px;border-radius:50%;pointer-events:none;
+  opacity:.5;transition:.3s;
+}
+#ipm-root .kpi:nth-child(1)::after{background:radial-gradient(circle,rgba(79,70,229,.12) 0%,transparent 65%)}
+#ipm-root .kpi:nth-child(2)::after{background:radial-gradient(circle,rgba(8,145,178,.12) 0%,transparent 65%)}
+#ipm-root .kpi:nth-child(3)::after{background:radial-gradient(circle,rgba(5,150,105,.12) 0%,transparent 65%)}
+#ipm-root .kpi:nth-child(4)::after{background:radial-gradient(circle,rgba(184,146,74,.14) 0%,transparent 65%)}
+#ipm-root .kpi:nth-child(5)::after{background:radial-gradient(circle,rgba(225,29,72,.12) 0%,transparent 65%)}
+#ipm-root .kpi:hover::after{opacity:1;transform:scale(1.2)}
+
+/* Subtle tinted bg per color */
+#ipm-root .kpi:nth-child(1){background:linear-gradient(150deg,#f5f3ff 0%,#fff 55%)}
+#ipm-root .kpi:nth-child(2){background:linear-gradient(150deg,#ecfeff 0%,#fff 55%)}
+#ipm-root .kpi:nth-child(3){background:linear-gradient(150deg,#ecfdf5 0%,#fff 55%)}
+#ipm-root .kpi:nth-child(4){background:linear-gradient(150deg,var(--brand-soft) 0%,#fff 55%)}
+#ipm-root .kpi:nth-child(5){background:linear-gradient(150deg,#fff1f2 0%,#fff 55%)}
+
+/* Colored values */
+#ipm-root .kpi:nth-child(1) .kpi-value{color:var(--indigo)}
+#ipm-root .kpi:nth-child(2) .kpi-value{color:var(--cyan)}
+#ipm-root .kpi:nth-child(3) .kpi-value{color:var(--emerald)}
+#ipm-root .kpi:nth-child(4) .kpi-value{color:var(--brand)}
+#ipm-root .kpi:nth-child(5) .kpi-value{color:var(--rose)}
+
+/* Hover glow per color */
+#ipm-root .kpi:nth-child(1):hover{box-shadow:0 16px 44px rgba(79,70,229,.18),0 4px 10px rgba(79,70,229,.1)}
+#ipm-root .kpi:nth-child(2):hover{box-shadow:0 16px 44px rgba(8,145,178,.18),0 4px 10px rgba(8,145,178,.1)}
+#ipm-root .kpi:nth-child(3):hover{box-shadow:0 16px 44px rgba(5,150,105,.18),0 4px 10px rgba(5,150,105,.1)}
+#ipm-root .kpi:nth-child(4):hover{box-shadow:0 16px 44px rgba(184,146,74,.18),0 4px 10px rgba(184,146,74,.1)}
+#ipm-root .kpi:nth-child(5):hover{box-shadow:0 16px 44px rgba(225,29,72,.18),0 4px 10px rgba(225,29,72,.1)}
+
+#ipm-root .kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700;position:relative;z-index:1}
+#ipm-root .kpi-value{font-size:34px;font-weight:800;margin-top:8px;letter-spacing:-.035em;line-height:1.1;color:var(--navy-ink);font-family:'Outfit','Inter',sans-serif;position:relative;z-index:1}
+#ipm-root .kpi-value.sm{font-size:16px}
+
+/* ══════════════════════════════════════════════
+   CARDS
+   ══════════════════════════════════════════════ */
+#ipm-root .card{
+  background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);
+  padding:24px 26px;margin-bottom:18px;
+  box-shadow:var(--shadow-xs);transition:.2s ease;
+  position:relative;overflow:hidden;
+}
+#ipm-root .card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--indigo),var(--purple),var(--cyan));
+  opacity:0;transition:.2s;
+}
+#ipm-root .card:hover::before{opacity:1}
+#ipm-root .card:hover{box-shadow:var(--shadow);border-color:#c8d0e8}
+#ipm-root .card h3{
+  margin:0 0 16px;font-size:16px;font-weight:800;
+  color:var(--navy-ink);letter-spacing:-.01em;
+  display:flex;align-items:center;gap:8px;
+}
+#ipm-root .card .sub{color:var(--ink-3);font-size:13px;margin:-10px 0 16px;line-height:1.5}
+#ipm-root .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+
+/* ══════════════════════════════════════════════
+   TABLE
+   ══════════════════════════════════════════════ */
+#ipm-root .tbl{width:100%;border-collapse:collapse}
+#ipm-root .tbl th, #ipm-root .tbl td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--line-2);font-size:13px}
+#ipm-root .tbl th{
+  color:var(--ink-3);text-transform:uppercase;letter-spacing:.08em;
+  font-size:10px;font-weight:800;
+  background:linear-gradient(135deg,#f4f6fd,#eef1fb);
+}
+#ipm-root .tbl tr:last-child td{border-bottom:0}
+#ipm-root .tbl tbody tr{transition:.15s}
+#ipm-root .tbl tbody tr:hover td{background:linear-gradient(135deg,#f8f9ff,#f4f6fd)}
+#ipm-root .muted{color:var(--muted);text-align:center;padding:28px !important}
+
+/* ══════════════════════════════════════════════
+   ACTIVITY SECTIONS
+   ══════════════════════════════════════════════ */
+#ipm-root .section-block{
+  border:1.5px solid var(--line);border-radius:14px;margin-bottom:14px;
+  overflow:hidden;background:#fff;
+  box-shadow:var(--shadow-xs);
+  transition:.2s;
+}
+#ipm-root .section-block:hover{border-color:#c8d0e8;box-shadow:var(--shadow)}
+#ipm-root .section-head{
+  background:linear-gradient(135deg,#f4f6fd 0%,#eef1fb 100%);
+  color:var(--navy-ink);padding:14px 20px;
+  font-weight:700;font-size:14px;display:flex;align-items:center;gap:12px;
+  transition:.18s;
+}
+#ipm-root .section-head:hover{background:linear-gradient(135deg,#eef1fb 0%,#e8edf8 100%)}
+#ipm-root .section-no{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--indigo) 100%);
+  color:#fff;width:28px;height:28px;border-radius:8px;
+  display:grid;place-items:center;font-weight:800;font-size:12px;
+  box-shadow:0 2px 6px rgba(14,42,92,.25);flex-shrink:0;
+}
+#ipm-root .item-row{padding:18px 20px;border-top:1px solid var(--line-2);background:#fff}
+#ipm-root .item-title{font-weight:700;font-size:13px;color:var(--navy-ink);margin-bottom:12px}
+#ipm-root .item-grid{display:grid;grid-template-columns:2fr 2fr 1fr;gap:12px}
+#ipm-root .actions{display:flex;justify-content:flex-end;margin-top:18px}
+
+/* HOI logo in topbar */
+#ipm-root .hoi-logo{
+  width:54px;height:42px;background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
+  padding:4px;overflow:hidden;
+}
+#ipm-root .hoi-logo img{max-width:100%;max-height:100%;object-fit:contain}
+#ipm-root .hoi-logo-fallback{
+  width:100%;height:100%;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  color:#fff;font-weight:800;border-radius:6px;
+}
+
+/* Login logo preview */
+#ipm-root .login-logo-preview{margin-top:14px;display:flex;justify-content:center}
+#ipm-root .login-logo-frame{
+  width:100%;height:96px;background:var(--surface-2);
+  border:1.5px solid var(--line);border-radius:12px;
+  display:flex;align-items:center;justify-content:center;padding:12px;
+  animation:fadeIn .28s ease;
+}
+#ipm-root .login-logo-frame img{max-width:100%;max-height:100%;object-fit:contain}
+
+/* ══════════════════════════════════════════════
+   MODAL
+   ══════════════════════════════════════════════ */
+#ipm-root .modal{
+  display:none;position:fixed;inset:0;
+  background:rgba(9,24,51,.6);
+  z-index:100;align-items:center;justify-content:center;padding:20px;
+  backdrop-filter:blur(8px);
+}
+#ipm-root .modal.open{display:flex}
+#ipm-root .modal-card{
+  background:#fff;border-radius:var(--radius-lg);max-width:780px;width:100%;
+  max-height:92vh;overflow:auto;padding:32px;position:relative;
+  box-shadow:0 40px 100px rgba(9,24,51,.3);
+  border:1px solid rgba(255,255,255,.8);
+}
+#ipm-root .modal-x{
+  position:absolute;top:16px;right:16px;width:34px;height:34px;
+  border-radius:9px;background:var(--surface-2);font-size:20px;color:var(--ink-2);transition:.15s;
+}
+#ipm-root .modal-x:hover{background:var(--surface-soft);color:var(--rose)}
+#ipm-root .modal-header{
+  display:flex;align-items:center;gap:18px;padding-bottom:20px;
+  margin-bottom:20px;border-bottom:1px solid var(--line);
+}
+#ipm-root .modal-logo{
+  width:84px;height:62px;background:#fff;border:1.5px solid var(--line);
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  padding:6px;flex-shrink:0;
+}
+#ipm-root .modal-logo img{max-width:100%;max-height:100%;object-fit:contain}
+
+/* ══════════════════════════════════════════════
+   TOAST
+   ══════════════════════════════════════════════ */
+#ipm-root .toast{
+  position:fixed;bottom:28px;right:28px;
+  background:linear-gradient(135deg,#0d1421,#162040);
+  color:#fff;
+  padding:14px 22px;border-radius:12px;font-size:13px;font-weight:600;
+  opacity:0;transform:translateY(12px);transition:.28s;z-index:200;
+  box-shadow:0 16px 40px rgba(9,24,51,.35);
+  border:1px solid rgba(255,255,255,.1);
+}
+#ipm-root .toast.show{opacity:1;transform:none}
+#ipm-root .toast.err{background:linear-gradient(135deg,#9f1239,#e11d48)}
+#ipm-root .toast.ok{background:linear-gradient(135deg,#065f46,#059669)}
+
+/* ══════════════════════════════════════════════
+   IMO DASHBOARD
+   ══════════════════════════════════════════════ */
+#ipm-root .imo-header{margin-bottom:30px;position:relative}
+#ipm-root .imo-header-title{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:800;color:var(--indigo);
+  text-transform:uppercase;letter-spacing:.16em;margin:0 0 12px;
+  background:linear-gradient(135deg,var(--indigo-soft),var(--purple-soft));
+  border:1px solid rgba(79,70,229,.18);
+  padding:6px 14px;border-radius:999px;
+}
+#ipm-root .imo-header-title::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:linear-gradient(135deg,var(--indigo),var(--purple));
+  box-shadow:0 0 0 3px rgba(79,70,229,.15);
+}
+#ipm-root .imo-header-heading{
+  font-size:32px;font-weight:800;margin:0;letter-spacing:-.035em;line-height:1.1;
+  font-family:'Outfit','Inter',sans-serif;
+  background:linear-gradient(135deg,var(--navy-ink) 0%,var(--indigo) 60%,var(--purple) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+#ipm-root .imo-header-sub{font-size:14px;color:var(--ink-3);margin:10px 0 0;line-height:1.55;max-width:680px}
+
+#ipm-root .campus-header-img-wrap{
+  background:#fff;border-radius:14px;padding:16px 20px;margin-bottom:22px;
+  display:flex;align-items:center;justify-content:center;
+  border:1.5px solid var(--line);box-shadow:var(--shadow-xs);
+}
+#ipm-root .campus-header-img{max-width:100%;height:auto;max-height:80px;object-fit:contain;display:block}
+
+/* Campus cards — bold gradient */
+#ipm-root .campus-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:8px}
+#ipm-root .campus-card{
+  position:relative;overflow:hidden;
+  border-radius:24px;padding:38px 36px;
+  cursor:pointer;transition:.35s cubic-bezier(.16,1,.3,1);
+  border:1.5px solid transparent;
+  box-shadow:
+    0 8px 32px rgba(14,42,92,.16),
+    0 2px 8px rgba(14,42,92,.08),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+/* VMCC card — navy → indigo */
+#ipm-root .campus-card:nth-child(1){
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(184,146,74,.15) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 100%, rgba(79,70,229,.18) 0%, transparent 55%),
+    linear-gradient(145deg,#0a1f4a 0%,#143372 35%,#1e4595 65%,#2a5298 100%);
+  color:#fff;
+}
+/* VMPC card — teal → emerald */
+#ipm-root .campus-card:nth-child(2){
+  background:
+    radial-gradient(ellipse at 80% 0%, rgba(212,176,107,.15) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 100%, rgba(8,145,178,.22) 0%, transparent 55%),
+    linear-gradient(145deg,#0a3d3d 0%,#0e5a5e 35%,#0d7a7e 65%,#0891b2 100%);
+  color:#fff;
+}
+#ipm-root .campus-card:hover{transform:translateY(-6px) scale(1.005);box-shadow:var(--shadow-xl)}
+#ipm-root .campus-card:nth-child(1):hover{
+  box-shadow:
+    0 28px 70px rgba(14,42,92,.42),
+    0 8px 20px rgba(14,42,92,.18),
+    inset 0 1px 0 rgba(255,255,255,.18);
+}
+#ipm-root .campus-card:nth-child(2):hover{
+  box-shadow:
+    0 28px 70px rgba(8,91,98,.42),
+    0 8px 20px rgba(8,91,98,.18),
+    inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+#ipm-root .campus-card > *{position:relative;z-index:1}
+
+/* Decorative glow orb */
+#ipm-root .campus-card::before{
+  content:'';position:absolute;top:-110px;right:-110px;
+  width:340px;height:340px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,255,255,.14) 0%,transparent 65%);
+  transition:.4s cubic-bezier(.16,1,.3,1);
+}
+#ipm-root .campus-card:hover::before{transform:scale(1.25);background:radial-gradient(circle,rgba(255,255,255,.18) 0%,transparent 65%);}
+#ipm-root .campus-card::after{
+  content:'';position:absolute;bottom:-70px;left:-50px;
+  width:240px;height:240px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 65%);
+  transition:.4s cubic-bezier(.16,1,.3,1);
+}
+#ipm-root .campus-card:hover::after{transform:scale(1.15);}
+#ipm-root .campus-card-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+  color:rgba(255,255,255,.95);font-size:10px;font-weight:800;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding:7px 16px;border-radius:999px;margin-bottom:24px;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  box-shadow:0 2px 8px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.2);
+}
+#ipm-root .campus-card h2{font-size:28px;font-weight:800;margin:0 0 8px;letter-spacing:-.025em;color:#fff;font-family:'Outfit','Inter',sans-serif;text-shadow:0 2px 12px rgba(0,0,0,.12)}
+#ipm-root .campus-card-desc{font-size:13px;color:rgba(255,255,255,.9);margin:0 0 32px;line-height:1.6}
+#ipm-root .campus-stats{
+  display:flex;gap:30px;margin-top:auto;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+#ipm-root .campus-stat{display:flex;flex-direction:column;gap:5px}
+#ipm-root .campus-stat-val{font-size:26px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.025em;font-family:'Outfit','Inter',sans-serif;text-shadow:0 1px 8px rgba(0,0,0,.12)}
+#ipm-root .campus-stat-lbl{font-size:10px;color:rgba(255,255,255,.82);text-transform:uppercase;letter-spacing:.1em;font-weight:700}
+#ipm-root .campus-divider{width:1px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.28) 50%,transparent);align-self:stretch}
+#ipm-root .campus-arrow{
+  position:absolute;bottom:32px;right:32px;
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+  display:grid;place-items:center;color:rgba(255,255,255,.95);
+  transition:.3s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  box-shadow:0 4px 12px rgba(0,0,0,.1), inset 0 1px 0 rgba(255,255,255,.2);
+}
+#ipm-root .campus-card:hover .campus-arrow{
+  background:rgba(255,255,255,.95);color:var(--navy);
+  transform:translateX(6px) scale(1.05);
+  box-shadow:0 8px 22px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+/* Institution cards */
+#ipm-root .inst-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:8px}
+#ipm-root .inst-card{
+  background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);
+  padding:0;cursor:pointer;overflow:hidden;
+  box-shadow:var(--shadow-xs);transition:.25s ease;
+  display:flex;flex-direction:column;
+}
+#ipm-root .inst-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--indigo)}
+#ipm-root .inst-card-top{height:4px;background:linear-gradient(90deg,var(--indigo),var(--purple),var(--cyan))}
+#ipm-root .inst-card-logo{
+  height:110px;background:linear-gradient(135deg,#f4f6fd,#eef1fb);
+  display:flex;align-items:center;justify-content:center;padding:16px;
+  border-bottom:1px solid var(--line);
+}
+#ipm-root .inst-card-logo img{max-width:100%;max-height:100%;object-fit:contain}
+#ipm-root .inst-card-logo-fallback{
+  font-size:28px;font-weight:800;color:var(--navy);letter-spacing:.04em;
+  background:linear-gradient(135deg,var(--indigo-soft),var(--purple-soft));
+  width:100%;height:100%;display:grid;place-items:center;border-radius:8px;
+}
+#ipm-root .inst-card-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;gap:10px}
+#ipm-root .inst-card-name{font-size:13px;font-weight:700;color:var(--navy-ink);line-height:1.4;flex:1}
+#ipm-root .inst-card-code{font-size:10px;font-weight:800;color:var(--indigo);text-transform:uppercase;letter-spacing:.12em}
+#ipm-root .inst-card-meta{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+#ipm-root .inst-sub-count{
+  display:inline-flex;align-items:center;gap:6px;
+  background:linear-gradient(135deg,var(--indigo-soft),var(--purple-soft));
+  border:1px solid rgba(79,70,229,.15);
+  padding:5px 11px;border-radius:999px;
+  font-size:11px;font-weight:700;color:var(--indigo);
+}
+#ipm-root .inst-sub-count svg{color:var(--purple)}
+#ipm-root .inst-last-sub{font-size:11px;color:var(--muted)}
+#ipm-root .inst-status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+#ipm-root .inst-status-dot.has-subs{background:var(--emerald);box-shadow:0 0 0 3px rgba(5,150,105,.18)}
+#ipm-root .inst-status-dot.no-subs{background:var(--line)}
+
+/* Institution view header */
+#ipm-root .inst-view-header{
+  background:linear-gradient(135deg,#0e2a5c 0%,#1e3f8a 60%,#2d4fa3 100%);
+  border-radius:var(--radius-lg);padding:26px 30px;margin-bottom:22px;
+  display:flex;align-items:center;gap:22px;
+  box-shadow:0 8px 32px rgba(14,42,92,.25);
+  position:relative;overflow:hidden;
+}
+#ipm-root .inst-view-header::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.1) 0%,transparent 65%);
+}
+#ipm-root .inst-view-logo{
+  width:76px;height:58px;background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;padding:8px;flex-shrink:0;
+  backdrop-filter:blur(4px);
+}
+#ipm-root .inst-view-logo img{max-width:100%;max-height:100%;object-fit:contain}
+#ipm-root .inst-view-logo-fallback{color:#fff;font-weight:800;font-size:18px}
+#ipm-root .inst-view-info{flex:1;min-width:0}
+#ipm-root .inst-view-code{font-size:10px;font-weight:800;color:rgba(255,255,255,.85);letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px}
+#ipm-root .inst-view-name{font-size:20px;font-weight:800;color:#fff;margin:0;letter-spacing:-.01em}
+#ipm-root .inst-view-campus{font-size:13px;color:rgba(255,255,255,.85);margin-top:3px}
+#ipm-root .inst-view-stats{display:flex;gap:26px;flex-shrink:0}
+#ipm-root .inst-view-stat{text-align:right}
+#ipm-root .inst-view-stat-val{font-size:22px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
+#ipm-root .inst-view-stat-lbl{font-size:10px;color:rgba(255,255,255,.78);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-top:2px}
+
+#ipm-root .btn-view{
+  padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;
+  background:var(--surface-2);border:1px solid var(--line);color:var(--navy-ink);
+  transition:.18s;cursor:pointer;
+}
+#ipm-root .btn-view:hover{background:var(--surface-soft);border-color:var(--brand);color:var(--brand)}
+#ipm-root .btn-edit-sub{margin-left:5px;background:var(--surface-2);border-color:var(--line);color:var(--ink-2)}
+#ipm-root .btn-edit-sub:hover{background:var(--surface-soft);border-color:var(--indigo);color:var(--indigo)}
+
+/* Detail sections */
+#ipm-root .detail-section{border:1.5px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden;background:#fff;box-shadow:var(--shadow-xs)}
+#ipm-root .detail-section-head{
+  background:linear-gradient(135deg,#f4f6fd,#eef1fb);padding:12px 18px;
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:800;color:var(--navy-ink);
+  text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--line);
+}
+#ipm-root .detail-no{
+  background:linear-gradient(135deg,var(--navy),var(--indigo));color:#fff;
+  width:26px;height:26px;border-radius:7px;display:grid;place-items:center;
+  font-size:11px;font-weight:800;flex-shrink:0;
+  box-shadow:0 2px 6px rgba(14,42,92,.25);
+}
+#ipm-root .detail-item{padding:16px 18px;border-top:1px solid var(--line-2)}
+#ipm-root .detail-item:first-child{border-top:0}
+#ipm-root .detail-item-title{font-size:13px;font-weight:700;color:var(--navy-ink);margin-bottom:12px}
+#ipm-root .detail-fields{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+#ipm-root .detail-field label{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:5px}
+#ipm-root .detail-field p{font-size:13px;color:var(--ink);margin:0;line-height:1.5}
+#ipm-root .detail-sec{border:1.5px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;background:#fff;box-shadow:var(--shadow-xs)}
+#ipm-root .detail-sec-hd{
+  list-style:none;display:flex;align-items:center;gap:10px;padding:11px 16px;cursor:pointer;
+  background:linear-gradient(135deg,#091833 0%,#162040 50%,#0e2450 100%);
+  font-size:12px;font-weight:700;color:#fff;user-select:none;
+}
+#ipm-root .detail-sec-hd::-webkit-details-marker, #ipm-root .detail-sec-hd::marker{display:none}
+#ipm-root .detail-sec-title{flex:1;text-transform:uppercase;letter-spacing:.07em;font-size:11px}
+#ipm-root .detail-sec-count{
+  font-size:10px;font-weight:800;color:var(--brand-2);
+  background:rgba(212,176,107,.18);border:1px solid rgba(212,176,107,.3);
+  padding:2px 9px;border-radius:999px;white-space:nowrap;
+}
+#ipm-root .detail-sec-chev{flex-shrink:0;transition:transform .2s ease;color:rgba(255,255,255,.82)}
+#ipm-root details.detail-sec[open] .detail-sec-chev{transform:rotate(180deg)}
+#ipm-root .detail-sec-bd .detail-item{padding:14px 16px;border-top:1px solid var(--line-2)}
+#ipm-root .detail-sec-bd .detail-item:first-child{border-top:0}
+#ipm-root .attach-chip{
+  display:inline-flex;align-items:center;gap:4px;padding:3px 10px;
+  background:linear-gradient(135deg,var(--indigo-soft),var(--purple-soft));
+  border:1px solid rgba(79,70,229,.15);
+  border-radius:6px;font-size:12px;color:var(--indigo);text-decoration:none;font-weight:600;
+}
+#ipm-root .attach-chip:hover{background:linear-gradient(135deg,#e0e7ff,#ede9fe)}
+
+/* ─── HOI Dashboard extras ───────────────────────────────────────── */
+#ipm-root .dash-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:0}
+@media(max-width:700px){#ipm-root .dash-grid-2{grid-template-columns:1fr}}
+
+#ipm-root .dash-recent-row{
+  display:flex;align-items:center;gap:14px;padding:13px 4px;
+  border-bottom:1px solid var(--line-2);
+  border-radius:8px;
+  transition:.18s ease;
+  margin:0 -8px;padding-left:8px;padding-right:8px;
+}
+#ipm-root .dash-recent-row:last-child{border-bottom:0}
+#ipm-root .dash-recent-row:hover{background:linear-gradient(135deg,#f8f9ff,#f4f6fd);transform:translateX(2px)}
+#ipm-root .dash-recent-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+#ipm-root .dot-rev{
+  background:linear-gradient(135deg,#10b981,var(--emerald));
+  box-shadow:0 0 0 3px rgba(5,150,105,.18),0 0 12px rgba(5,150,105,.4);
+}
+#ipm-root .dot-sub{
+  background:linear-gradient(135deg,#6366f1,var(--indigo));
+  box-shadow:0 0 0 3px rgba(79,70,229,.18),0 0 12px rgba(79,70,229,.4);
+}
+#ipm-root .dash-recent-info{flex:1;min-width:0}
+#ipm-root .dash-recent-week{font-size:13px;font-weight:700;color:var(--navy-ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ipm-root .dash-recent-meta{font-size:11px;color:var(--muted);margin-top:2px}
+
+#ipm-root .dash-mo-row{display:flex;align-items:center;gap:12px;margin-bottom:11px}
+#ipm-root .dash-mo-row:last-child{margin-bottom:0}
+#ipm-root .dash-mo-lbl{font-size:11px;font-weight:700;color:var(--ink-2);width:72px;flex-shrink:0;text-transform:uppercase;letter-spacing:.04em}
+#ipm-root .dash-mo-bar-wrap{
+  flex:1;height:9px;
+  background:linear-gradient(180deg,var(--surface-soft),var(--surface-2));
+  border-radius:999px;overflow:hidden;
+  border:1px solid rgba(14,42,92,.04);
+}
+#ipm-root .dash-mo-bar{
+  height:100%;
+  background:linear-gradient(90deg,var(--indigo) 0%,var(--purple) 70%,#a78bfa 100%);
+  border-radius:999px;transition:width .5s cubic-bezier(.16,1,.3,1);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25);
+}
+#ipm-root .dash-mo-val{font-size:12px;font-weight:800;color:var(--navy-ink);width:22px;text-align:right;flex-shrink:0;font-family:'Outfit','Inter',sans-serif}
+
+/* ─── Week Calendar Picker ────────────────────────────────────────── */
+#ipm-root .wk-picker{position:relative;width:100%}
+#ipm-root .wk-picker-btn{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:9px 12px;border:1.5px solid var(--line);border-radius:8px;
+  background:#fff;cursor:pointer;font-size:13px;color:var(--ink);
+  text-align:left;transition:.15s;font-family:inherit;
+}
+#ipm-root .wk-picker-btn:hover{border-color:var(--indigo)}
+#ipm-root .wk-picker-btn svg{flex-shrink:0;color:var(--muted)}
+#ipm-root .wk-picker-drop{
+  position:absolute;top:calc(100% + 6px);left:0;z-index:200;
+  background:#fff;border:1.5px solid var(--line);border-radius:16px;
+  box-shadow:0 16px 48px rgba(14,42,92,.18);padding:14px;min-width:300px;
+}
+#ipm-root .wk-cal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+#ipm-root .wk-cal-hd strong{font-size:13px;font-weight:800;color:var(--navy)}
+#ipm-root .wk-cal-hd button{
+  background:none;border:none;cursor:pointer;font-size:20px;color:var(--ink-2);
+  width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:.12s;
+}
+#ipm-root .wk-cal-hd button:hover{background:var(--surface-2);color:var(--navy)}
+#ipm-root .wk-cal-tbl{width:100%;border-collapse:collapse;font-size:12px}
+#ipm-root .wk-cal-tbl thead th{text-align:center;padding:4px 2px;font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+#ipm-root .wk-row{cursor:pointer;border-radius:7px;transition:.13s}
+#ipm-root .wk-row:hover td{background:rgba(79,70,229,.07)}
+#ipm-root .wk-row:hover td.wk-num{background:rgba(79,70,229,.14);color:var(--indigo)}
+#ipm-root .wk-row.wk-sel td{background:rgba(79,70,229,.1);font-weight:600;color:var(--navy-ink)}
+#ipm-root .wk-row.wk-sel td.wk-num{background:linear-gradient(135deg,var(--indigo),var(--purple));color:#fff;font-weight:800}
+#ipm-root .wk-row td{text-align:center;padding:6px 3px;border-radius:0}
+#ipm-root .wk-row td:first-child{border-radius:7px 0 0 7px}
+#ipm-root .wk-row td:last-child{border-radius:0 7px 7px 0}
+#ipm-root td.wk-num{font-size:9px;font-weight:700;color:var(--muted);padding-right:6px;white-space:nowrap}
+#ipm-root td.wk-other{color:var(--line)}
+#ipm-root td.wk-today{font-weight:800;color:var(--indigo)}
+#ipm-root .wk-row.wk-future{cursor:not-allowed;opacity:.35}
+#ipm-root .wk-row.wk-future:hover td{background:none !important}
+#ipm-root .wk-cal-hint{margin-top:10px;font-size:10px;color:var(--muted);text-align:center;border-top:1px solid var(--line);padding-top:8px}
+
+/* ── Inline full calendar (replaces the dropdown) ─────────────────
+   The calendar is now rendered directly on the page inside a card
+   (no dropdown, no popup, no positioning tricks). Clicking any day
+   snaps to that week's Monday. All 7 days of the clicked/selected
+   week are highlighted together. Future weeks are dimmed and
+   non-interactive. */
+#ipm-root .wk-inline-cal{
+  background:#fff;
+  border-radius:10px;
+}
+#ipm-root .wk-inline-cal .wk-cal-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:12px;padding:4px 4px 10px;
+  border-bottom:1px solid var(--line);
+}
+#ipm-root .wk-inline-cal .wk-cal-hd strong{font-size:15px;font-weight:800;color:var(--navy)}
+#ipm-root .wk-inline-cal .wk-cal-hd button{
+  background:var(--surface-2);border:1px solid var(--line);cursor:pointer;font-size:18px;color:var(--ink-2);
+  width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:.12s;
+}
+#ipm-root .wk-inline-cal .wk-cal-hd button:hover{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+#ipm-root .wk-cal-tbl-inline{
+  width:100%;table-layout:fixed;border-collapse:separate;border-spacing:2px;
+}
+#ipm-root .wk-cal-tbl-inline thead th{
+  text-align:center;padding:6px 2px;font-size:10px;font-weight:800;
+  color:var(--muted);text-transform:uppercase;letter-spacing:.06em;
+}
+#ipm-root .wk-cal-tbl-inline td.wk-day{
+  text-align:center;padding:4px;height:44px;cursor:pointer;
+  transition:background .12s;
+}
+#ipm-root .wk-cal-tbl-inline td.wk-day > span{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;min-height:36px;border-radius:8px;
+  font-size:14px;color:var(--navy-ink);
+}
+/* Hovering any day highlights the whole week (the entire row) */
+#ipm-root .wk-cal-tbl-inline tbody tr:hover td.wk-day:not(.wk-future) > span{
+  background:rgba(79,70,229,.09);
+}
+/* The currently-selected week is highlighted across all 7 days */
+#ipm-root .wk-cal-tbl-inline td.wk-day.wk-sel > span{
+  background:linear-gradient(135deg,var(--indigo),var(--purple));
+  color:#fff;font-weight:700;
+}
+/* Today gets an outline accent */
+#ipm-root .wk-cal-tbl-inline td.wk-day.wk-today > span{
+  outline:2px solid var(--indigo);outline-offset:-2px;font-weight:800;
+}
+/* Spill-over days dimmed */
+#ipm-root .wk-cal-tbl-inline td.wk-day.wk-other > span{color:#cbd5e1}
+/* Future weeks: not clickable */
+#ipm-root .wk-cal-tbl-inline td.wk-day.wk-future{cursor:not-allowed;opacity:.3}
+#ipm-root .wk-cal-tbl-inline tbody tr:hover td.wk-day.wk-future > span{background:transparent !important}
+
+/* ══════════════════════════════════════════════
+   SKELETON LOADER
+   ══════════════════════════════════════════════ */
+#ipm-root .skeleton{
+  background:linear-gradient(90deg,#eef1fb 25%,#e0e5f5 50%,#eef1fb 75%);
+  background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════ */
+@media(max-width:920px){
+  #ipm-root .login-wrap{grid-template-columns:1fr}
+  #ipm-root .login-brand{padding:40px 32px;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
+  #ipm-root .login-brand img{width:280px;margin:0 auto 24px}
+  #ipm-root .brand-points li{justify-content:center}
+  #ipm-root .brand-points li:hover{padding-left:0}
+  #ipm-root .login-card{padding:44px 32px}
+  #ipm-root .grid-2{grid-template-columns:1fr}
+  #ipm-root .item-grid{grid-template-columns:1fr}
+  #ipm-root .topbar{flex-wrap:wrap;padding:10px 16px;gap:10px;height:auto}
+  #ipm-root .tabs{order:3;width:100%;overflow-x:auto;margin-left:0;padding-bottom:2px}
+  #ipm-root .content{padding:20px 16px}
+  #ipm-root .campus-grid{grid-template-columns:1fr;gap:18px}
+  #ipm-root .campus-card{padding:30px 26px;border-radius:20px}
+  #ipm-root .campus-card h2{font-size:24px}
+  #ipm-root .campus-stats{gap:18px}
+  #ipm-root .campus-stat-val{font-size:22px}
+  #ipm-root .campus-arrow{bottom:24px;right:24px;width:38px;height:38px}
+  #ipm-root .imo-header-heading{font-size:24px}
+  #ipm-root .inst-grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+  #ipm-root .inst-view-header{flex-direction:column;align-items:flex-start;gap:18px}
+  #ipm-root .inst-view-stats{flex-direction:row;gap:18px}
+  #ipm-root .detail-fields{grid-template-columns:1fr}
+  #ipm-root .kpi-grid{grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+  #ipm-root .kpi{padding:18px 20px}
+  #ipm-root .kpi-value{font-size:26px}
+  #ipm-root .page-title{font-size:22px}
+  #ipm-root .lf-role-btn{padding:13px 14px !important}
+  #ipm-root .lf-role-title{font-size:13px}
+}
+
+/* ══════════════════════════════════════════════
+   LOGIN ENHANCEMENTS — Animated decorative layer
+   ══════════════════════════════════════════════ */
+
+/* Dot grid pattern on brand panel */
+#ipm-root .lb-bg-grid{
+  position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(circle, rgba(255,255,255,.18) 1px, transparent 1px);
+  background-size:32px 32px;
+  -webkit-mask-image:radial-gradient(ellipse 95% 95% at 50% 50%, black 12%, transparent 100%);
+  mask-image:radial-gradient(ellipse 95% 95% at 50% 50%, black 12%, transparent 100%);
+}
+
+/* Animated glowing orbs */
+#ipm-root .lb-glow{
+  position:absolute;border-radius:50%;pointer-events:none;z-index:0;
+  filter:blur(80px);will-change:transform;
+}
+#ipm-root .lb-glow-1{
+  width:560px;height:560px;top:-200px;right:-120px;
+  background:radial-gradient(circle, rgba(184,146,74,.36) 0%, transparent 60%);
+  animation:lb-float 14s ease-in-out infinite;
+}
+#ipm-root .lb-glow-2{
+  width:380px;height:380px;bottom:-100px;left:-90px;
+  background:radial-gradient(circle, rgba(79,70,229,.28) 0%, transparent 60%);
+  animation:lb-float 11s ease-in-out infinite reverse;animation-delay:-4s;
+}
+#ipm-root .lb-glow-3{
+  width:260px;height:260px;top:42%;left:8%;
+  background:radial-gradient(circle, rgba(8,145,178,.22) 0%, transparent 60%);
+  animation:lb-float 17s ease-in-out infinite;animation-delay:-8s;
+}
+
+/* Spinning orbit rings with glowing dots */
+#ipm-root .lb-ring{position:absolute;border-radius:50%;pointer-events:none;z-index:0;}
+#ipm-root .lb-ring-1{
+  width:520px;height:520px;top:-150px;right:-165px;
+  border:1px solid rgba(255,255,255,.08);
+  animation:lb-spin 28s linear infinite;
+}
+#ipm-root .lb-ring-1::before{
+  content:'';position:absolute;top:50%;left:-6px;transform:translateY(-50%);
+  width:11px;height:11px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(212,176,107,.95),rgba(184,146,74,.85));
+  box-shadow:
+    0 0 16px 5px rgba(212,176,107,.55),
+    0 0 32px 10px rgba(212,176,107,.25);
+}
+#ipm-root .lb-ring-2{
+  width:330px;height:330px;bottom:50px;left:-95px;
+  border:1px solid rgba(184,146,74,.14);
+  animation:lb-spin 20s linear infinite reverse;
+}
+#ipm-root .lb-ring-2::before{
+  content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%);
+  width:10px;height:10px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(124,58,237,.9),rgba(79,70,229,.8));
+  box-shadow:
+    0 0 14px 4px rgba(124,58,237,.55),
+    0 0 28px 8px rgba(124,58,237,.22);
+}
+#ipm-root .lb-content{position:relative;z-index:1;display:flex;flex-direction:column;}
+
+@keyframes lb-float{
+  0%,100%{transform:translateY(0) scale(1);opacity:1}
+  33%{transform:translateY(-28px) scale(1.08);opacity:.9}
+  66%{transform:translateY(20px) scale(.96);opacity:.96}
+}
+@keyframes lb-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Premium display font for login headings */
+#ipm-root .login-brand h1, #ipm-root .login-card h2{font-family:'Outfit','Inter',sans-serif;}
+#ipm-root .login-brand h1{font-size:20px;font-weight:800;letter-spacing:-.02em;line-height:1.25;text-shadow:0 2px 24px rgba(0,0,0,.18)}
+#ipm-root .login-card h2{font-size:30px;font-weight:800;letter-spacing:-.03em}
+
+/* VMRF logo — warm glow */
+#ipm-root #vmrfMainLogo{filter:drop-shadow(0 8px 28px rgba(184,146,74,.35)) drop-shadow(0 2px 6px rgba(0,0,0,.15)) brightness(1.1);}
+
+/* Login card — rainbow top accent bar */
+#ipm-root .login-card{position:relative;overflow:hidden;}
+#ipm-root .lc-top-bar{
+  position:absolute;top:0;left:0;right:0;height:4px;z-index:2;
+  background:linear-gradient(90deg,
+    var(--indigo) 0%,
+    var(--purple) 25%,
+    var(--brand) 50%,
+    var(--brand-2) 65%,
+    var(--cyan) 88%,
+    var(--indigo) 100%);
+  background-size:200% 100%;
+  animation:lc-shimmer 8s linear infinite;
+}
+@keyframes lc-shimmer{
+  0%{background-position:0% 0%}
+  100%{background-position:200% 0%}
+}
+/* Subtle inner glow on card */
+#ipm-root .login-card::after{
+  content:'';position:absolute;top:4px;left:50%;transform:translateX(-50%);
+  width:60%;height:1px;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(79,70,229,.25),rgba(184,146,74,.28),transparent);
+}
+
+/* Input color-accent focus */
+#ipm-root .login-card input:focus, #ipm-root .login-card select:focus{
+  border-color:var(--indigo);
+  box-shadow:0 0 0 4px rgba(79,70,229,.1);
+}
+
+/* Button shimmer sweep on hover */
+#ipm-root .btn-primary::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(108deg,transparent 38%,rgba(255,255,255,.2) 50%,transparent 62%);
+  transform:translateX(-100%);transition:transform .55s ease;
+}
+#ipm-root .btn-primary:hover::after{transform:translateX(100%);}
+
+/* Brand sub-label */
+#ipm-root .tagline{color:rgba(255,255,255,.82);font-size:14px;}
+
+/* Brand bullet points on dark */
+#ipm-root .brand-points li{color:rgba(255,255,255,.92);}
+
+/* Segment active - ensure contrast on dark login card */
+#ipm-root .login-card .seg-btn.active{color:#fff;}
+
+
+/* ══════════════════════════════════════════════
+   PREMIUM FORM FIELDS — Login card
+   ══════════════════════════════════════════════ */
+
+/* Group spacing */
+#ipm-root .lf-group{ margin-bottom: 20px; }
+
+/* Label with icon */
+#ipm-root .login-card label{
+  display: flex; align-items: center; gap: 7px;
+  font-size: 10.5px; font-weight: 800; color: var(--ink-3);
+  letter-spacing: .09em; text-transform: uppercase;
+  margin: 0 0 8px;
+}
+#ipm-root .login-card label svg{ color: var(--indigo); opacity: .8; flex-shrink: 0; }
+
+/* Input wrapper */
+#ipm-root .lf-ctrl{ position: relative; }
+
+/* Left icon */
+#ipm-root .lf-ico{
+  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+  color: #8090c0; pointer-events: none; display: flex; align-items: center;
+  transition: color .22s ease, transform .22s ease; z-index: 1;
+}
+
+/* Field base styles */
+#ipm-root .lf-ctrl input, #ipm-root .lf-ctrl select{
+  width: 100%;
+  padding: 14px 16px 14px 44px !important;
+  background: linear-gradient(135deg,#f6f8ff 0%, #f3f5fc 100%);
+  border: 1.5px solid #dde3f5;
+  border-radius: 12px;
+  font-size: 14px; font-weight: 500;
+  color: var(--ink);
+  transition: background .22s ease, border-color .22s ease, box-shadow .22s ease;
+  -webkit-appearance: none; appearance: none;
+  box-shadow: inset 0 1px 2px rgba(14,42,92,.03);
+}
+
+/* Custom select arrow */
+#ipm-root .lf-ctrl select{
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a0aecb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 14px) center;
+  background-color: #f5f7ff;
+  padding-right: 38px !important;
+  cursor: pointer;
+}
+
+/* Hover */
+#ipm-root .lf-ctrl input:hover:not(:focus), #ipm-root .lf-ctrl select:hover:not(:focus){
+  border-color: #b8c4ec;
+  background: linear-gradient(135deg,#eef2ff 0%, #ebf0ff 100%);
+}
+
+/* Focus — whole wrapper */
+#ipm-root .lf-ctrl:focus-within input, #ipm-root .lf-ctrl:focus-within select{
+  border-color: var(--indigo);
+  background: #fff;
+  box-shadow:
+    0 0 0 4px rgba(79,70,229,.12),
+    0 4px 14px rgba(79,70,229,.08);
+  outline: none;
+}
+#ipm-root .lf-ctrl:focus-within .lf-ico{ color: var(--indigo); transform: translateY(-50%) scale(1.08); }
+
+/* Password field */
+#ipm-root .pw-wrap.lf-ctrl input{ padding-right: 48px !important; }
+#ipm-root .pw-wrap.lf-ctrl .pw-eye{ right: 10px; }
+
+/* ── Role toggle cards ──────────────────────── */
+#ipm-root .lf-role-seg{
+  display: flex !important;
+  gap: 10px !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+#ipm-root .lf-role-btn{
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 15px 16px !important;
+  border-radius: 14px !important;
+  border: 1.5px solid #dde3f5 !important;
+  background: linear-gradient(135deg,#f6f8ff 0%, #f1f4fc 100%) !important;
+  color: var(--ink-3) !important;
+  text-align: left !important;
+  cursor: pointer;
+  transition: all .25s cubic-bezier(.16,1,.3,1) !important;
+  box-shadow: inset 0 1px 2px rgba(14,42,92,.03) !important;
+  position: relative;
+  overflow: hidden;
+}
+#ipm-root .lf-role-btn:hover{
+  border-color: #b8c4ec !important;
+  background: linear-gradient(135deg,#eef2ff 0%, #ebf0ff 100%) !important;
+  color: var(--navy) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(79,70,229,.12), inset 0 1px 0 rgba(255,255,255,.8) !important;
+}
+#ipm-root .lf-role-btn.active{
+  border-color: var(--indigo) !important;
+  background: linear-gradient(135deg, #eef2ff 0%, #f3eeff 50%, #ede9fe 100%) !important;
+  color: var(--indigo) !important;
+  box-shadow:
+    0 0 0 3px rgba(79,70,229,.16),
+    0 8px 22px rgba(79,70,229,.22),
+    inset 0 1px 0 rgba(255,255,255,.9) !important;
+}
+#ipm-root .lf-role-btn.active::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--indigo),var(--purple));
+  border-radius: 14px 14px 0 0;
+}
+#ipm-root .lf-role-ico{
+  flex-shrink: 0;
+  color: var(--muted);
+  transition: color .22s, transform .22s cubic-bezier(.16,1,.3,1);
+}
+#ipm-root .lf-role-btn.active .lf-role-ico{ color: var(--indigo); transform: scale(1.12); }
+#ipm-root .lf-role-btn:hover:not(.active) .lf-role-ico{ color: var(--navy); }
+#ipm-root .lf-role-title{
+  font-size: 14px; font-weight: 800;
+  letter-spacing: -.01em; line-height: 1;
+  color: inherit; font-family: 'Outfit', 'Inter', sans-serif;
+}
+#ipm-root .lf-role-sub{
+  font-size: 10px; font-weight: 500;
+  color: var(--muted); margin-top: 3px; letter-spacing: .02em;
+}
+#ipm-root .lf-role-btn.active .lf-role-sub{ color: #4338ca; }
+
+/* Sign-in button refinement */
+#ipm-root .login-card .btn-primary{
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 10px; padding: 16px; font-size: 15px;
+  border-radius: 12px; letter-spacing: .04em; gap: 6px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+#ipm-root .login-card .btn-primary svg{ transition: transform .25s cubic-bezier(.16,1,.3,1); flex-shrink: 0; }
+#ipm-root .login-card .btn-primary:hover svg{ transform: translateX(5px); }
+
+/* Smaller sub in login-card */
+#ipm-root .login-card .sub{ margin: 0 0 22px; }
+
+
+/* ═══════════════════════════════════════════════════
+   CUSTOM DROPDOWN — Campus & Institution
+   ═══════════════════════════════════════════════════ */
+
+/* Outer wrapper (extends lf-ctrl) */
+#ipm-root .cd-wrap{ position: relative; }
+
+/* Trigger button — mimics input styling */
+#ipm-root .cd-trigger{
+  width: 100%;
+  display: flex; align-items: center; gap: 8px;
+  padding: 13px 14px 13px 44px;
+  background: #f5f7ff;
+  border: 1.5px solid #dde3f5;
+  border-radius: 12px;
+  font-size: 14px; font-weight: 500;
+  color: var(--ink);
+  text-align: left; cursor: pointer;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, border-radius .15s ease;
+  font-family: inherit; line-height: 1.4;
+}
+#ipm-root .cd-trigger:hover{ border-color: #c2cef0; background: #eef1ff; }
+
+/* Open state on wrapper */
+#ipm-root .cd-wrap.cd-open .cd-trigger{
+  border-color: var(--indigo);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(79,70,229,.1);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+#ipm-root .cd-wrap.cd-open .lf-ico{ color: var(--indigo); }
+
+/* Value text */
+#ipm-root .cd-val{ flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#ipm-root .cd-ph{ color: var(--muted) !important; font-weight: 400 !important; }
+
+/* Chevron arrow */
+#ipm-root .cd-arr{
+  flex-shrink: 0; color: #a0aecb;
+  transition: transform .22s cubic-bezier(.16,1,.3,1), color .2s;
+}
+#ipm-root .cd-wrap.cd-open .cd-arr{ transform: rotate(180deg); color: var(--indigo); }
+
+/* Floating panel */
+#ipm-root .cd-panel{
+  position: absolute; top: calc(100% - 3px); left: 0; right: 0; z-index: 200;
+  background: #fff;
+  border: 1.5px solid var(--indigo);
+  border-top-color: rgba(79,70,229,.25);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  box-shadow:
+    0 20px 48px rgba(14,42,92,.14),
+    0 4px 12px rgba(14,42,92,.08);
+  overflow: hidden;
+  animation: cd-drop .18s cubic-bezier(.16,1,.3,1);
+}
+@keyframes cd-drop {
+  from { opacity: 0; transform: translateY(-6px) scaleY(.97); }
+  to   { opacity: 1; transform: translateY(0)   scaleY(1); }
+}
+
+/* Scrollable item list */
+#ipm-root .cd-list{
+  padding: 6px;
+  max-height: 216px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #dde3f5 transparent;
+}
+#ipm-root .cd-list::-webkit-scrollbar{ width: 4px; }
+#ipm-root .cd-list::-webkit-scrollbar-track{ background: transparent; }
+#ipm-root .cd-list::-webkit-scrollbar-thumb{ background: #dde3f5; border-radius: 99px; }
+
+/* Individual option */
+#ipm-root .cd-item{
+  width: 100%; display: flex; align-items: center;
+  padding: 10px 14px; border-radius: 9px;
+  background: none; border: none;
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  text-align: left; cursor: pointer;
+  transition: background .13s ease, color .13s ease;
+  font-family: inherit; line-height: 1.4;
+}
+#ipm-root .cd-item:hover{ background: linear-gradient(135deg, #f0f3ff, #f5f0ff); color: var(--navy); }
+#ipm-root .cd-item.cd-sel{
+  background: linear-gradient(135deg, #eef2ff 0%, #f5f0ff 100%);
+  color: var(--indigo); font-weight: 700;
+}
+#ipm-root .cd-item.cd-sel::after{
+  content: '';
+  display: block; margin-left: auto; flex-shrink: 0;
+  width: 16px; height: 16px;
+  background: var(--indigo);
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><polyline points='20 6 9 17 4 12'/></svg>") center/contain no-repeat;
+}
+
+/* Empty / loading state */
+#ipm-root .cd-empty{
+  padding: 20px 16px; text-align: center;
+  font-size: 12px; color: var(--muted); font-style: italic;
+}
+
+
+/* ── Confirm dialog — btn-ghost override for white modal surface ── */
+#ipm-root .modal-card .btn-ghost{
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border: 1.5px solid var(--line);
+}
+#ipm-root .modal-card .btn-ghost:hover{
+  background: var(--surface-soft);
+  color: var(--navy);
+  border-color: #c2cef0;
+}
+
+
+/* ─── Draft rows & chips ─────────────────────────────────────────── */
+#ipm-root .chip-draft{background:rgba(234,179,8,.15);color:#78350f;border:1px solid rgba(234,179,8,.4)}
+#ipm-root .draft-row{background:#fffdf0}
+#ipm-root .draft-row:hover td{background:#fffae6}
+#ipm-root .btn-continue-draft{background:#fef3c7;color:#92400e;border-color:#fde68a}
+#ipm-root .btn-continue-draft:hover{background:#fde68a;border-color:#f59e0b}
+#ipm-root .btn-discard-draft{color:#b91c1c;background:var(--surface-2);border-color:var(--line);margin-left:4px}
+#ipm-root .btn-discard-draft:hover{background:#fee2e2;border-color:#fca5a5;color:#b91c1c}
+#ipm-root .btn-delete-sub{color:#b91c1c;background:var(--surface-2);border-color:var(--line);margin-left:4px}
+#ipm-root .btn-delete-sub:hover{background:#fee2e2;border-color:#fca5a5;color:#b91c1c}
+
+
+/* ─── Wide modal for comparison ──────────────────────────────────── */
+#ipm-root .modal-card-wide{max-width:1100px !important}
+
+/* ─── Comparison tabs (updated) ──────────────────────────────────── */
+#ipm-root .cmp-tab{
+  display:inline-flex;align-items:center;
+  padding:7px 16px;border:none;background:none;
+  font-size:12px;font-weight:600;color:var(--ink-2);
+  cursor:pointer;font-family:inherit;transition:.15s;
+}
+#ipm-root .cmp-tab:hover{background:var(--surface-soft);color:var(--navy)}
+#ipm-root .cmp-tab.cmp-tab-active{background:var(--navy);color:#fff}
+
+
+/* PDF button in submission tables */
+#ipm-root .btn-pdf-sub{background:linear-gradient(135deg,#0e2a5c,#1a3d7a);color:#fff !important;border:none;font-weight:700;}
+#ipm-root .btn-pdf-sub:hover{background:linear-gradient(135deg,#1a3d7a,#2353a4);color:#fff !important;border-color:transparent;}
+#ipm-root .btn-pdf-sub:disabled{opacity:.5;cursor:not-allowed;}
+
+
+/* ══════════════════════════════════════════════════
+   HOI DASHBOARD
+   ══════════════════════════════════════════════════ */
+
+/* Greeting banner */
+#ipm-root .dash-banner{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;padding:28px 32px;margin-bottom:22px;
+  background:
+    radial-gradient(ellipse at 85% 0%, rgba(184,146,74,.16) 0%, transparent 55%),
+    radial-gradient(ellipse at 0% 100%, rgba(79,70,229,.18) 0%, transparent 55%),
+    linear-gradient(135deg,#0a1f4a 0%,#143372 40%,#1a3878 70%,#0e2856 100%);
+  border-radius:18px;color:#fff;
+  position:relative;overflow:hidden;
+  box-shadow:
+    0 12px 40px rgba(14,42,92,.22),
+    0 2px 8px rgba(14,42,92,.1),
+    inset 0 1px 0 rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.06);
+}
+/* Decorative dot grid pattern overlay */
+#ipm-root .dash-banner::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size:28px 28px;
+  -webkit-mask-image:radial-gradient(ellipse 90% 100% at 100% 50%, black 10%, transparent 70%);
+  mask-image:radial-gradient(ellipse 90% 100% at 100% 50%, black 10%, transparent 70%);
+}
+/* Decorative gold glow orb on the right */
+#ipm-root .dash-banner::after{
+  content:'';position:absolute;top:-90px;right:-60px;
+  width:280px;height:280px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(184,146,74,.18) 0%,transparent 65%);
+}
+#ipm-root .dash-banner > *{position:relative;z-index:1}
+#ipm-root .dash-banner-left{display:flex;flex-direction:column;gap:4px}
+#ipm-root .dash-banner-greeting{font-size:11px;font-weight:800;color:rgba(212,176,107,.95);text-transform:uppercase;letter-spacing:.16em}
+#ipm-root .dash-banner-name{
+  font-size:26px;font-weight:800;color:#fff;letter-spacing:-.025em;
+  font-family:'Outfit','Inter',sans-serif;
+  text-shadow:0 2px 12px rgba(0,0,0,.18);
+}
+#ipm-root .dash-banner-meta{font-size:12px;color:rgba(255,255,255,.6);margin-top:4px}
+
+/* KPI row */
+#ipm-root .dash-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+@media(max-width:700px){#ipm-root .dash-kpi-row{grid-template-columns:repeat(2,1fr);gap:12px}}
+#ipm-root .dash-kpi-card{
+  background:#fff;border:1.5px solid var(--line);border-radius:16px;
+  padding:22px 24px;position:relative;overflow:hidden;
+  box-shadow:0 1px 3px rgba(14,42,92,.04), 0 4px 12px rgba(14,42,92,.04);
+  transition:.3s cubic-bezier(.16,1,.3,1);
+}
+#ipm-root .dash-kpi-card:hover{transform:translateY(-3px);border-color:transparent}
+#ipm-root .dash-kpi-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px 3px 0 0;
+}
+/* Decorative corner glow per variant */
+#ipm-root .dash-kpi-card::after{
+  content:'';position:absolute;top:-50px;right:-50px;
+  width:160px;height:160px;border-radius:50%;pointer-events:none;
+  opacity:.55;transition:.3s;
+}
+#ipm-root .dash-kpi-card:hover::after{opacity:1;transform:scale(1.2)}
+
+#ipm-root .dash-kpi-week{background:linear-gradient(150deg,#f5f3ff 0%,#fff 55%)}
+#ipm-root .dash-kpi-week::before{background:linear-gradient(90deg,#4f46e5,#818cf8)}
+#ipm-root .dash-kpi-week::after{background:radial-gradient(circle,rgba(79,70,229,.14) 0%,transparent 65%)}
+#ipm-root .dash-kpi-week:hover{box-shadow:0 16px 44px rgba(79,70,229,.2),0 4px 10px rgba(79,70,229,.1)}
+
+#ipm-root .dash-kpi-month{background:linear-gradient(150deg,#ecfdf5 0%,#fff 55%)}
+#ipm-root .dash-kpi-month::before{background:linear-gradient(90deg,#10b981,#34d399)}
+#ipm-root .dash-kpi-month::after{background:radial-gradient(circle,rgba(16,185,129,.14) 0%,transparent 65%)}
+#ipm-root .dash-kpi-month:hover{box-shadow:0 16px 44px rgba(16,185,129,.2),0 4px 10px rgba(16,185,129,.1)}
+
+#ipm-root .dash-kpi-streak{background:linear-gradient(150deg,#fff7ed 0%,#fff 55%)}
+#ipm-root .dash-kpi-streak::before{background:linear-gradient(90deg,#f97316,#fb923c)}
+#ipm-root .dash-kpi-streak::after{background:radial-gradient(circle,rgba(249,115,22,.14) 0%,transparent 65%)}
+#ipm-root .dash-kpi-streak:hover{box-shadow:0 16px 44px rgba(249,115,22,.2),0 4px 10px rgba(249,115,22,.1)}
+
+#ipm-root .dash-kpi-total{background:linear-gradient(150deg,var(--brand-soft) 0%,#fff 55%)}
+#ipm-root .dash-kpi-total::before{background:linear-gradient(90deg,#c8a24b,#e8c87a)}
+#ipm-root .dash-kpi-total::after{background:radial-gradient(circle,rgba(184,146,74,.16) 0%,transparent 65%)}
+#ipm-root .dash-kpi-total:hover{box-shadow:0 16px 44px rgba(184,146,74,.2),0 4px 10px rgba(184,146,74,.1)}
+
+#ipm-root .dash-kpi-icon{
+  width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;background:#fff;color:var(--navy-ink);
+  box-shadow:0 2px 6px rgba(14,42,92,.08), inset 0 0 0 1px rgba(14,42,92,.05);
+  position:relative;z-index:1;
+}
+#ipm-root .dash-kpi-week .dash-kpi-icon{color:var(--indigo)}
+#ipm-root .dash-kpi-month .dash-kpi-icon{color:var(--emerald)}
+#ipm-root .dash-kpi-streak .dash-kpi-icon{color:#ea580c}
+#ipm-root .dash-kpi-total .dash-kpi-icon{color:var(--brand)}
+
+#ipm-root .dash-kpi-label{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;position:relative;z-index:1}
+#ipm-root .dash-kpi-value{
+  font-size:30px;font-weight:800;color:var(--navy-ink);letter-spacing:-.035em;line-height:1;
+  font-family:'Outfit','Inter',sans-serif;position:relative;z-index:1;
+}
+#ipm-root .dash-kpi-week .dash-kpi-value{color:var(--indigo)}
+#ipm-root .dash-kpi-month .dash-kpi-value{color:var(--emerald)}
+#ipm-root .dash-kpi-streak .dash-kpi-value{color:#ea580c}
+#ipm-root .dash-kpi-total .dash-kpi-value{color:var(--brand)}
+#ipm-root .dash-kpi-sub{font-size:11px;color:var(--muted);margin-top:5px;position:relative;z-index:1}
+
+/* Main grid */
+#ipm-root .dash-main-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:700px){#ipm-root .dash-main-grid{grid-template-columns:1fr}}
+#ipm-root .dash-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+#ipm-root .dash-view-all{font-size:12px;font-weight:600;color:var(--brand);background:none;border:none;cursor:pointer;padding:0;font-family:inherit}
+#ipm-root .dash-view-all:hover{text-decoration:underline}
+
+/* Bar chart */
+#ipm-root .dash-bar-chart{display:flex;align-items:flex-end;gap:10px;height:120px;padding-top:8px}
+#ipm-root .dash-bar-col{display:flex;flex-direction:column;align-items:center;flex:1;gap:5px}
+#ipm-root .dash-bar-wrap{
+  flex:1;width:100%;
+  background:linear-gradient(180deg,var(--surface-soft),var(--surface-2));
+  border-radius:8px;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  border:1px solid rgba(14,42,92,.04);
+}
+#ipm-root .dash-bar-fill{
+  width:100%;
+  background:linear-gradient(180deg,var(--indigo) 0%,var(--purple) 65%,#a78bfa 100%);
+  border-radius:7px;transition:.5s cubic-bezier(.16,1,.3,1);min-height:4px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    0 -2px 8px rgba(79,70,229,.25);
+}
+#ipm-root .dash-bar-val{font-size:11px;font-weight:800;color:var(--navy-ink);font-family:'Outfit','Inter',sans-serif}
+#ipm-root .dash-bar-lbl{font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;
+              letter-spacing:.06em;white-space:nowrap}
+
+/* Alert */
+#ipm-root .dash-alert{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:16px 20px;
+  background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);
+  border:1.5px solid #f59e0b;
+  border-radius:14px;margin-bottom:20px;
+  box-shadow:
+    0 4px 16px rgba(245,158,11,.12),
+    inset 0 1px 0 rgba(255,255,255,.6);
+  position:relative;overflow:hidden;
+}
+#ipm-root .dash-alert::before{
+  content:'';position:absolute;top:0;left:0;width:4px;height:100%;
+  background:linear-gradient(180deg,#f59e0b,#d97706);
+}
+#ipm-root .dash-alert-icon{font-size:22px;flex-shrink:0;filter:drop-shadow(0 2px 4px rgba(217,119,6,.3))}
+#ipm-root .dash-alert-body{flex:1;min-width:0}
+#ipm-root .dash-alert-title{font-size:13px;font-weight:800;color:#92400e;margin-bottom:7px;letter-spacing:-.005em}
+#ipm-root .dash-alert-pills{display:flex;flex-wrap:wrap;gap:6px}
+#ipm-root .dash-pending-pill{
+  background:#fff;border:1px solid #f59e0b;border-radius:7px;
+  padding:3px 11px;font-size:12px;font-weight:700;color:#92400e;
+  box-shadow:0 1px 3px rgba(245,158,11,.15);
+}
+
+
+/* Week picker card overflow fix */
+#ipm-root #hoi-submit .card:first-child{ overflow: visible; }
+
+
+/* ─── Institution KPI row (IMO institution view) ──────────────────── */
+#ipm-root .inst-kpi-row{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px;
+}
+@media(max-width:700px){#ipm-root .inst-kpi-row{grid-template-columns:repeat(3,1fr)}}
+
+#ipm-root .inst-kpi{
+  background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);
+  padding:16px 18px;position:relative;overflow:hidden;
+  box-shadow:var(--shadow-xs);transition:.18s;
+}
+#ipm-root .inst-kpi:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+#ipm-root .inst-kpi::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:3px 3px 0 0;
+}
+#ipm-root .inst-kpi-week::before{background:linear-gradient(90deg,#4f46e5,#818cf8)}
+#ipm-root .inst-kpi-month::before{background:linear-gradient(90deg,#10b981,#34d399)}
+#ipm-root .inst-kpi-year::before{background:linear-gradient(90deg,#f97316,#fb923c)}
+#ipm-root .inst-kpi-total::before{background:linear-gradient(90deg,#c8a24b,#e8c87a)}
+#ipm-root .inst-kpi-last::before{background:linear-gradient(90deg,#8b5cf6,#a78bfa)}
+
+#ipm-root .inst-kpi-icon{
+  width:34px;height:34px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;margin-bottom:10px;background:var(--surface-2);color:var(--navy-ink);
+}
+#ipm-root .inst-kpi-val{
+  font-size:26px;font-weight:800;color:var(--navy-ink);letter-spacing:-.03em;line-height:1;
+}
+#ipm-root .inst-kpi-lbl{
+  font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;
+  letter-spacing:.08em;margin-top:5px;
+}
+
+/* Remove old inst-view-stats since replaced by KPI row */
+#ipm-root .inst-view-stats{display:none}
+
+/* ─── Entry-card "Completed" lock state ────────────────────────────────
+   When the Follow-Up Status select inside an entry-card is set to
+   "Completed", the JS layer adds `.entry-completed` to that one
+   entry-card and disables ONLY that card's Action Items textarea —
+   never the follow-up text, never any other card, and never an
+   "Add entry" card added afterwards (each card has its own status
+   select, empty by default, so its action items stay editable).
+   Styling here paints the locked Action Items field as "done & frozen"
+   (soft green) so the lock reads as intentional rather than broken. */
+#ipm-root .entry-card.entry-completed [data-field="actionItems"]{
+  background:#f0fdf4;
+  border-color:#86efac;
+  color:#166534;
+  opacity:1;                          /* override the UA disabled fade */
+  -webkit-text-fill-color:#166534;    /* Safari needs this on disabled */
+  cursor:not-allowed;
+}
+#ipm-root .entry-card.entry-completed [data-field="actionItems"]:hover{
+  border-color:#86efac;               /* suppress the indigo hover */
+}
+
+</style>
